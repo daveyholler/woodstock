@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img width="543" height="606" alt="image" src="https://github.com/user-attachments/assets/5abca17a-4337-40ed-b703-665409ecc2e9" />
 
-Things you may want to cover:
+## Step One:
 
-* Ruby version
+`bundle install`
 
-* System dependencies
+## Step Two:
 
-* Configuration
+`rails s`
 
-* Database creation
+## Step Three:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`http://localhost:3000`
