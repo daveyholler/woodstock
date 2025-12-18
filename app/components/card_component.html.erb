@@ -1,0 +1,11 @@
+<div class="<%= combined_classes %>" data-slot="card">
+  <% if has_header? %>
+    <div class="<%= header_classes %>">
+      <%= title %>
+      <%= description %>
+      <%= action %>
+    </div>
+  <% end %>
+  <%= body %>
+  <%= footer %>
+</div>

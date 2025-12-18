@@ -1,0 +1,11 @@
+<button type="button" class="<%= combined_classes %>">
+  <% if icon? %>
+    <%= icon %>
+  <% elsif icon_name %>
+    <%= helpers.lucide_icon(icon_name, class: "flex-shrink-0 #{icon_size_classes}") %>
+  <% end %>
+  <% if label? %>
+    <%= label %>
+  <% end %>
+  <%= content unless label? %>
+</button>

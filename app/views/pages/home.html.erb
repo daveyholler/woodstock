@@ -1,0 +1,53 @@
+<div class="flex flex-col gap-8">
+  <div class="flex items-center gap-4">
+    <span class="text-muted-foreground">Theme:</span>
+    <%= render ThemeToggleComponent.new %>
+  </div>
+
+  <div class="flex flex-row flex-wrap items-center gap-12">
+  <%= render AvatarComponent.new do |c| %>
+    <% c.with_image(src: "https://github.com/shadcn.png", alt: "@shadcn") %>
+    <% c.with_fallback { "CN" } %>
+  <% end %>
+
+  <%= render AvatarComponent.new(class: "rounded-lg") do |c| %>
+    <% c.with_image(src: "https://github.com/evilrabbit.png", alt: "@evilrabbit") %>
+    <% c.with_fallback { "ER" } %>
+  <% end %>
+
+  <%# Stacked avatars example %>
+  <div class="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+    <%= render AvatarComponent.new do |c| %>
+      <% c.with_image(src: "https://github.com/shadcn.png", alt: "@shadcn") %>
+      <% c.with_fallback { "CN" } %>
+    <% end %>
+
+    <%= render AvatarComponent.new do |c| %>
+      <% c.with_image(src: "https://github.com/maxleiter.png", alt: "@maxleiter") %>
+      <% c.with_fallback { "ML" } %>
+    <% end %>
+
+    <%= render AvatarComponent.new do |c| %>
+      <% c.with_image(src: "https://github.com/evilrabbit.png", alt: "@evilrabbit") %>
+      <% c.with_fallback { "ER" } %>
+    <% end %>
+  </div>
+  </div>
+
+  <%# Card example %>
+  <%= render CardComponent.new(class: "w-full max-w-sm") do |card| %>
+    <% card.with_title { "Card Title" } %>
+    <% card.with_description { "This is a description of the card. It provides additional context." } %>
+    <% card.with_body do %>
+      <p>This is the main content area of the card. You can put any content here including forms, lists, or other components.</p>
+    <% end %>
+    <% card.with_footer do %>
+      <p class="text-sm text-muted-foreground">Footer information</p>
+    <% end %>
+  <% end %>
+
+  <%# Buttno Examples %>
+  <%= render ButtonComponent.new(variant: "outline", size: "sm", icon: "rocket") do |button| %>
+    <% button.with_label { "Click Me" } %>
+  <% end %>
+</div>
