@@ -358,5 +358,115 @@
     </div>
   </section>
 
+  <!-- Badge Component Examples -->
+  <section class="space-y-6 w-full max-w-2xl">
+    <h2 class="text-2xl font-bold">Badge Examples</h2>
+
+    <!-- Variants -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Variants</h3>
+      <div class="flex flex-wrap gap-3">
+        <%= render BadgeComponent.new(variant: :default) do %>
+          Default
+        <% end %>
+        <%= render BadgeComponent.new(variant: :secondary) do %>
+          Secondary
+        <% end %>
+        <%= render BadgeComponent.new(variant: :destructive) do %>
+          Destructive
+        <% end %>
+        <%= render BadgeComponent.new(variant: :outline) do %>
+          Outline
+        <% end %>
+      </div>
+    </div>
+
+    <!-- With Icons -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">With Icons</h3>
+      <div class="flex flex-wrap gap-3">
+        <%= render BadgeComponent.new(variant: :default) do %>
+          <%= lucide_icon("check", class: "size-3") %>
+          Verified
+        <% end %>
+        <%= render BadgeComponent.new(variant: :secondary) do %>
+          <%= lucide_icon("clock", class: "size-3") %>
+          Pending
+        <% end %>
+        <%= render BadgeComponent.new(variant: :destructive) do %>
+          <%= lucide_icon("alert-circle", class: "size-3") %>
+          Error
+        <% end %>
+        <%= render BadgeComponent.new(variant: :outline) do %>
+          <%= lucide_icon("tag", class: "size-3") %>
+          Label
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Counter Badges -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Counter Badges</h3>
+      <p class="text-sm text-muted-foreground">Use custom classes for compact number badges.</p>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render BadgeComponent.new(classes: "h-5 min-w-5 px-1 font-mono tabular-nums") do %>
+          8
+        <% end %>
+        <%= render BadgeComponent.new(variant: :secondary, classes: "h-5 min-w-5 px-1 font-mono tabular-nums") do %>
+          24
+        <% end %>
+        <%= render BadgeComponent.new(variant: :destructive, classes: "h-5 min-w-5 px-1 font-mono tabular-nums") do %>
+          99+
+        <% end %>
+        <%= render BadgeComponent.new(variant: :outline, classes: "h-5 min-w-5 px-1 font-mono tabular-nums") do %>
+          5
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Status Badges -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Status Badges</h3>
+      <p class="text-sm text-muted-foreground">Common use cases for status indicators.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render BadgeComponent.new(classes: "bg-green-600 text-white hover:bg-green-600/90") do %>
+          <%= lucide_icon("check-circle", class: "size-3") %>
+          Active
+        <% end %>
+        <%= render BadgeComponent.new(classes: "bg-yellow-500 text-white hover:bg-yellow-500/90") do %>
+          <%= lucide_icon("clock", class: "size-3") %>
+          In Progress
+        <% end %>
+        <%= render BadgeComponent.new(classes: "bg-blue-600 text-white hover:bg-blue-600/90") do %>
+          <%= lucide_icon("star", class: "size-3") %>
+          Featured
+        <% end %>
+        <%= render BadgeComponent.new(variant: :outline, classes: "text-muted-foreground") do %>
+          Draft
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Custom Styling -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Custom Styling</h3>
+      <p class="text-sm text-muted-foreground">Override default styles with custom classes.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render BadgeComponent.new(variant: :secondary, classes: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300") do %>
+          Purple
+        <% end %>
+        <%= render BadgeComponent.new(variant: :outline, classes: "border-dashed") do %>
+          Dashed Border
+        <% end %>
+        <%= render BadgeComponent.new(classes: "rounded-md") do %>
+          Rounded MD
+        <% end %>
+        <%= render BadgeComponent.new(variant: :secondary, classes: "uppercase tracking-wider text-[10px]") do %>
+          Uppercase
+        <% end %>
+      </div>
+    </div>
+  </section>
+
 </div>
 <%# %>
