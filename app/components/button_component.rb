@@ -1,73 +1,135 @@
-class ButtonComponent < ViewComponent::Base
-  renders_one :icon, "IconSlot"
-  renders_one :label, "LabelSlot"
+# frozen_string_literal: true
 
-  def initialize(class: nil, variant: :primary, size: :sm, icon: nil, icon_side: :left)
-    @class = binding.local_variable_get(:class)
+class ButtonComponent < ViewComponent::Base
+  # Renders a button component based on shadcn-ui
+  #
+  # @example Basic usage
+  #   <%= render ButtonComponent.new do %>
+  #     Click me
+  #   <% end %>
+  #
+  # @example With variant and size
+  #   <%= render ButtonComponent.new(variant: :destructive, size: :lg) do %>
+  #     Delete
+  #   <% end %>
+  #
+  # @example Icon button
+  #   <%= render ButtonComponent.new(size: :icon, aria_label: "Settings") do %>
+  #     <%= lucide_icon("settings") %>
+  #   <% end %>
+  #
+  # @example As a link
+  #   <%= render ButtonComponent.new(tag: :a, href: "/dashboard") do %>
+  #     Go to Dashboard
+  #   <% end %>
+
+  VARIANTS = %i[default destructive outline secondary ghost link].freeze
+  SIZES = %i[default sm lg icon icon_sm icon_lg].freeze
+  TYPES = %i[button submit reset].freeze
+
+  def initialize(
+    variant: :default,
+    size: :default,
+    tag: :button,
+    type: :button,
+    disabled: false,
+    classes: nil,
+    **html_attributes
+  )
     @variant = variant.to_sym
     @size = size.to_sym
-    @icon = icon
-    @icon_side = icon_side.to_sym
+    @tag = tag.to_sym
+    @type = type.to_sym
+    @disabled = disabled
+    @classes = classes
+    @html_attributes = html_attributes
+
+    validate_variant!
+    validate_size!
   end
 
-  def size_classes
-    case @size
-    when :sm then "gap-1.5 h-8 px-3 text-sm"
-    when :md then "gap-2 h-10 px-4 text-base"
-    when :lg then "gap-2 h-11 px-6 text-lg"
-    end
+  def call
+    content_tag(@tag, content, **tag_attributes)
   end
 
-  def icon_name
-    @icon
+  private
+
+  def validate_variant!
+    return if VARIANTS.include?(@variant)
+
+    raise ArgumentError, "Invalid variant: #{@variant}. Must be one of: #{VARIANTS.join(', ')}"
   end
 
-  def icon_size_classes
-    case @size
-    when :sm then "w-4 h-4"
-    when :md then "w-5 h-5"
-    when :lg then "w-5 h-5"
-    end
+  def validate_size!
+    return if SIZES.include?(@size)
+
+    raise ArgumentError, "Invalid size: #{@size}. Must be one of: #{SIZES.join(', ')}"
+  end
+
+  def tag_attributes
+    attrs = {
+      class: component_classes,
+      disabled: @disabled || nil
+    }
+
+    # Only add type attribute for button elements
+    attrs[:type] = @type.to_s if @tag == :button
+
+    attrs.merge(@html_attributes).compact
+  end
+
+  def component_classes
+    [
+      base_classes,
+      variant_classes,
+      size_classes,
+      @classes
+    ].compact.join(" ")
+  end
+
+  def base_classes
+    [
+      "inline-flex items-center justify-center gap-2",
+      "whitespace-nowrap rounded-md",
+      "text-sm font-medium",
+      "transition-all",
+      "disabled:pointer-events-none disabled:opacity-50",
+      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+      "aria-invalid:ring-destructive/20 aria-invalid:border-destructive"
+    ].join(" ")
   end
 
   def variant_classes
     case @variant
-    when :primary then "btn-primary"
-    when :success then "btn-success"
-    when :outline then "btn-outline"
-    when :ghost then "btn-ghost"
-    when :destructive then "btn-destructive"
+    when :default
+      "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90"
+    when :destructive
+      "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20"
+    when :outline
+      "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground"
+    when :secondary
+      "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80"
+    when :ghost
+      "hover:bg-accent hover:text-accent-foreground"
+    when :link
+      "text-primary underline-offset-4 hover:underline"
     end
   end
 
-  def combined_classes
-    base = "inline-flex items-center justify-center shadow-sm rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-    [base, size_classes, variant_classes, icon_order_classes, @class].compact.join(" ")
-  end
-
-  def icon_order_classes
-    @icon_side == :right ? "flex-row-reverse" : "flex-row"
-  end
-
-  class IconSlot < ViewComponent::Base
-    def initialize(name:, class: nil, **options)
-      @name = name
-      @class = binding.local_variable_get(:class)
-      @options = options
-    end
-
-    def call
-      lucide_icon(
-        @name,
-        class: [@class, "flex-shrink-0"].compact.join(" "),
-        **@options
-      )
-    end
-  end
-
-  class LabelSlot < ViewComponent::Base
-    def call
-      content
+  def size_classes
+    case @size
+    when :default
+      "h-9 px-4 py-2 has-[>svg]:px-3"
+    when :sm
+      "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5"
+    when :lg
+      "h-10 rounded-md px-6 has-[>svg]:px-4"
+    when :icon
+      "size-9"
+    when :icon_sm
+      "size-8"
+    when :icon_lg
+      "size-10"
     end
   end
 end

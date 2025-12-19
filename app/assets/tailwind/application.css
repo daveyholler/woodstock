@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
 @theme {
+    /* Accordion animations */
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+
+    /* Primary colors - for default button */
+    --color-primary: oklch(0.205 0.006 58.254);
+    --color-primary-foreground: oklch(0.985 0.001 106.423);
+
+    /* Destructive colors - for danger/delete actions */
+    --color-destructive: oklch(0.577 0.245 27.325);
+
+    /* Secondary colors - for secondary buttons */
+    --color-secondary: oklch(0.923 0.003 48.717);
+    --color-secondary-foreground: oklch(0.216 0.006 56.043);
+
+    /* Accent colors - for ghost/outline hover states */
+    --color-accent: oklch(0.923 0.003 48.717);
+    --color-accent-foreground: oklch(0.216 0.006 56.043);
+
+    /* Extra small shadow for buttons */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
     /* Font sizes from design tokens */
-    --font-size-xs: 9px;
+    /*--font-size-xs: 9px;
     --font-size-xs--line-height: 1.82;
     --font-size-sm: 11px;
     --font-size-sm--line-height: 1.82;
@@ -27,7 +49,7 @@
     --font-size-8xl: 78px;
     --font-size-8xl--line-height: 1.23;
     --font-size-9xl: 108px;
-    --font-size-9xl--line-height: 1;
+    --font-size-9xl--line-height: 1;*/
 
     --border: 0.5px;
 
@@ -59,7 +81,30 @@
         --color-muted-foreground: oklch(0.709 0.01 56.259); /* stone-400 */
         --color-border: oklch(0.374 0.01 67.558); /* stone-700 */
         --color-ring: oklch(0.709 0.01 56.259); /* stone-400 */
+
+        /* Button colors - dark mode */
+        --color-primary: oklch(0.985 0.001 106.423); /* stone-50 */
+        --color-primary-foreground: oklch(0.205 0.006 58.254); /* stone-900 */
+        --color-secondary: oklch(0.268 0.007 34.298); /* stone-800 */
+        --color-secondary-foreground: oklch(0.985 0.001 106.423); /* stone-50 */
+        --color-accent: oklch(0.268 0.007 34.298); /* stone-800 */
+        --color-accent-foreground: oklch(0.985 0.001 106.423); /* stone-50 */
     }
+}
+
+/* Accordion animation using CSS Grid */
+[data-slot="accordion-body"] {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.2s ease-out;
+}
+
+[data-slot="accordion-body"][data-state="open"] {
+    grid-template-rows: 1fr;
+}
+
+[data-slot="accordion-body"] > div {
+    overflow: hidden;
 }
 
 /* Dark mode via manual toggle (.dark class) */
@@ -70,6 +115,14 @@
     --color-muted-foreground: oklch(0.709 0.01 56.259);
     --color-border: oklch(0.374 0.01 67.558);
     --color-ring: oklch(0.709 0.01 56.259);
+
+    /* Button colors - dark mode */
+    --color-primary: oklch(0.985 0.001 106.423);
+    --color-primary-foreground: oklch(0.205 0.006 58.254);
+    --color-secondary: oklch(0.268 0.007 34.298);
+    --color-secondary-foreground: oklch(0.985 0.001 106.423);
+    --color-accent: oklch(0.268 0.007 34.298);
+    --color-accent-foreground: oklch(0.985 0.001 106.423);
 }
 
 html,

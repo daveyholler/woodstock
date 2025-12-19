@@ -1,0 +1,34 @@
+{
+  "name": "viewcomponent-generator-pipeline",
+  "version": "1.0.0",
+  "description": "Automated pipeline for generating Rails ViewComponents from shadcn/ui",
+  "type": "module",
+  "main": "bin/generate_component.mjs",
+  "scripts": {
+    "generate": "node bin/generate_component.mjs",
+    "verify": "bash bin/verify_component.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rails",
+    "viewcomponent",
+    "shadcn",
+    "tailwind",
+    "ai",
+    "automation",
+    "claude"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@anthropic-ai/claude-cli": "^1.0.0",
+    "shadcn": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "vc-generate": "./bin/generate_component.mjs"
+  }
+}

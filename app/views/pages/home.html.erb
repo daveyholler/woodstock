@@ -46,8 +46,231 @@
     <% end %>
   <% end %>
 
-  <%# Buttno Examples %>
-  <%= render ButtonComponent.new(variant: "outline", size: "sm", icon: "rocket") do |button| %>
-    <% button.with_label { "Click Me" } %>
-  <% end %>
+  <!-- Button Component Examples -->
+  <section class="space-y-6 w-full max-w-2xl">
+    <h2 class="text-2xl font-bold">Button Examples</h2>
+
+    <!-- Variants -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Variants</h3>
+      <div class="flex flex-wrap gap-3">
+        <%= render ButtonComponent.new(variant: :default) do %>
+          Default
+        <% end %>
+        <%= render ButtonComponent.new(variant: :secondary) do %>
+          Secondary
+        <% end %>
+        <%= render ButtonComponent.new(variant: :destructive) do %>
+          Destructive
+        <% end %>
+        <%= render ButtonComponent.new(variant: :outline) do %>
+          Outline
+        <% end %>
+        <%= render ButtonComponent.new(variant: :ghost) do %>
+          Ghost
+        <% end %>
+        <%= render ButtonComponent.new(variant: :link) do %>
+          Link
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Sizes -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Sizes</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render ButtonComponent.new(size: :sm) do %>
+          Small
+        <% end %>
+        <%= render ButtonComponent.new(size: :default) do %>
+          Default
+        <% end %>
+        <%= render ButtonComponent.new(size: :lg) do %>
+          Large
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Icon Buttons -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Icon Buttons</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render ButtonComponent.new(size: :icon_sm, variant: :outline, aria_label: "Settings") do %>
+          <%= lucide_icon("settings", class: "size-4") %>
+        <% end %>
+        <%= render ButtonComponent.new(size: :icon, variant: :outline, aria_label: "Add item") do %>
+          <%= lucide_icon("plus", class: "size-4") %>
+        <% end %>
+        <%= render ButtonComponent.new(size: :icon_lg, variant: :outline, aria_label: "Search") do %>
+          <%= lucide_icon("search", class: "size-5") %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- With Icons -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">With Icons</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render ButtonComponent.new(variant: :default) do %>
+          <%= lucide_icon("rocket", class: "size-4") %>
+          Launch
+        <% end %>
+        <%= render ButtonComponent.new(variant: :outline) do %>
+          <%= lucide_icon("download", class: "size-4") %>
+          Download
+        <% end %>
+        <%= render ButtonComponent.new(variant: :secondary) do %>
+          Next
+          <%= lucide_icon("arrow-right", class: "size-4") %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- States -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Disabled State</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render ButtonComponent.new(disabled: true) do %>
+          Disabled
+        <% end %>
+        <%= render ButtonComponent.new(variant: :outline, disabled: true) do %>
+          Disabled Outline
+        <% end %>
+      </div>
+    </div>
+
+    <!-- As Link -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">As Link</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <%= render ButtonComponent.new(tag: :a, href: "#") do %>
+          Link Button
+        <% end %>
+        <%= render ButtonComponent.new(tag: :a, href: "#", variant: :outline) do %>
+          Outline Link
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accordion Component Examples -->
+  <section class="space-y-6 w-full max-w-2xl">
+    <h2 class="text-2xl font-bold">Accordion Examples</h2>
+
+    <!-- Single Collapsible (Default) -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Single Collapsible</h3>
+      <p class="text-sm text-muted-foreground">Only one item open at a time, can close all items.</p>
+      <div class="w-full max-w-md">
+        <%= render AccordionComponent.new(type: :single, collapsible: true, default_value: "item-1") do |accordion| %>
+          <% accordion.with_item(value: "item-1") do |item| %>
+            <% item.with_trigger { "Product Information" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                Our flagship product combines cutting-edge technology with sleek design.
+                Built with premium materials, it offers unparalleled performance and reliability.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "item-2") do |item| %>
+            <% item.with_trigger { "Shipping Details" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                We offer worldwide shipping through trusted courier partners.
+                Standard delivery takes 3-5 business days, while express shipping
+                ensures delivery within 1-2 business days.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "item-3") do |item| %>
+            <% item.with_trigger { "Return Policy" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                We stand behind our products with a comprehensive 30-day return policy.
+                If you're not completely satisfied, simply return the item in its original condition.
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Multiple Open -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Multiple Open</h3>
+      <p class="text-sm text-muted-foreground">Multiple items can be open simultaneously.</p>
+      <div class="w-full max-w-md">
+        <%= render AccordionComponent.new(type: :multiple, default_value: ["faq-1", "faq-2"]) do |accordion| %>
+          <% accordion.with_item(value: "faq-1") do |item| %>
+            <% item.with_trigger { "Is it accessible?" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                Yes. The accordion follows WAI-ARIA design patterns with proper keyboard navigation,
+                focus management, and screen reader support.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "faq-2") do |item| %>
+            <% item.with_trigger { "Is it styled?" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                Yes. It comes with default styles that match the shadcn design system
+                and can be customized with Tailwind CSS classes.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "faq-3") do |item| %>
+            <% item.with_trigger { "Is it animated?" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                Yes. The accordion uses CSS grid transitions for smooth open/close animations.
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- With Disabled Item -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">With Disabled Item</h3>
+      <p class="text-sm text-muted-foreground">Individual items can be disabled.</p>
+      <div class="w-full max-w-md">
+        <%= render AccordionComponent.new(type: :single, collapsible: true) do |accordion| %>
+          <% accordion.with_item(value: "enabled-1") do |item| %>
+            <% item.with_trigger { "Available Feature" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                This feature is available and can be expanded.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "disabled-1", disabled: true) do |item| %>
+            <% item.with_trigger { "Coming Soon (Disabled)" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                This content is not accessible because the item is disabled.
+              </p>
+            <% end %>
+          <% end %>
+
+          <% accordion.with_item(value: "enabled-2") do |item| %>
+            <% item.with_trigger { "Another Feature" } %>
+            <% item.with_body do %>
+              <p class="text-muted-foreground">
+                This feature is also available and interactive.
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
 </div>
+<%# %>

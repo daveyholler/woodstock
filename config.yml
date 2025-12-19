@@ -1,0 +1,111 @@
+# ViewComponent Generator Configuration
+
+# Pipeline Settings
+pipeline:
+  # Enable parallel execution for Phase 1 analysis
+  parallel_phase1: true
+  
+  # Maximum concurrent agents in parallel mode
+  max_concurrent: 3
+  
+  # Retry failed agents (max attempts)
+  retry_attempts: 2
+  
+  # Timeout for each agent (seconds)
+  agent_timeout: 300
+
+# Directory Configuration
+directories:
+  prompts: ./prompts
+  analysis_output: ./claude/components
+  specs: ./spec/components
+  components: ./app/components
+  controllers: ./app/javascript/controllers
+  views: ./app/views/pages
+  docs: ./docs/components
+
+# Claude CLI Configuration
+claude:
+  # Claude CLI executable path
+  executable: claude
+  
+  # MCP servers to enable
+  mcp_servers:
+    - shadcn
+  
+  # Model to use (leave empty for default)
+  model: ""
+  
+  # Additional CLI flags
+  flags: []
+
+# Component Generation Settings
+component:
+  # Base class for all components
+  base_class: ApplicationComponent
+  
+  # Use classes: parameter instead of class:
+  use_classes_param: true
+  
+  # Testing framework
+  test_framework: rspec
+  
+  # Add examples to home page
+  add_home_examples: true
+  
+  # Generate Stimulus controller for interactive components
+  auto_stimulus: true
+  
+  # Tailwind configuration
+  tailwind:
+    # Tailwind version (v3 or v4)
+    version: v3
+    
+    # Auto-update tailwind.config.js
+    auto_update_config: false
+
+# Validation Settings
+validation:
+  # Run tests after generation
+  run_tests: true
+  
+  # Fail pipeline if tests don't pass
+  fail_on_test_failure: false
+  
+  # Verify file structure matches expected output
+  verify_outputs: true
+  
+  # Check for required Tailwind classes
+  verify_tailwind: true
+
+# Agent-Specific Settings
+agents:
+  phase1:
+    timeout: 180
+    retry: true
+  
+  phase2:
+    timeout: 300
+    retry: true
+    
+  phase3:
+    timeout: 120
+    retry: false
+
+# Logging
+logging:
+  level: info  # debug, info, warn, error
+  file: ./logs/component_generation.log
+  console: true
+  
+# Output Format
+output:
+  # Print detailed progress
+  verbose: true
+  
+  # Show agent responses
+  show_agent_output: false
+  
+  # Generate JSON report
+  json_report: true
+  report_path: ./reports/generation_report.json

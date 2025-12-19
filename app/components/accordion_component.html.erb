@@ -1,0 +1,10 @@
+<%= tag.div(
+  class: component_classes,
+  data: data_attributes,
+  **@html_attributes
+) do %>
+  <% items.each do |item| %>
+    <% item.open = default_open?(item.value) %>
+    <%= item %>
+  <% end %>
+<% end %>
