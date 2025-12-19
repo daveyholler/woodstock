@@ -1,6 +1,18 @@
 {
+  "permissions": {
+    "allow": [
+      "Read(/Users/daveyholler/development/scoutspace/app/components/dialogs/**)",
+      "Read(/Users/daveyholler/development/scoutspace/app/components/dialogs/**)",
+      "Read(/Users/daveyholler/development/scoutspace/app/javascript/controllers/components/dialogs/**)",
+      "Bash(bundle exec rspec:*)",
+      "Bash(rails runner:*)",
+      "Read(/Users/daveyholler/development/scoutspace/app/components/dialogs/**)",
+      "Read(/Users/daveyholler/development/scoutspace/app/components/dialogs/**)",
+      "Bash(npm install:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "shadcn"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

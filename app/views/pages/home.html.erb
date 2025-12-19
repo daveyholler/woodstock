@@ -272,5 +272,91 @@
     </div>
   </section>
 
+  <!-- Alert Dialog Component Examples -->
+  <section class="space-y-6 w-full max-w-2xl">
+    <h2 class="text-2xl font-bold">Alert Dialog Examples</h2>
+
+    <!-- Basic Usage -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Basic</h3>
+      <p class="text-sm text-muted-foreground">A standard confirmation dialog with title, description, and action buttons.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render AlertDialogComponent.new do |dialog| %>
+          <% dialog.with_trigger { "Show Dialog" } %>
+          <% dialog.with_body do |body| %>
+            <% body.with_title { "Are you absolutely sure?" } %>
+            <% body.with_description do %>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            <% end %>
+            <% body.with_cancel { "Cancel" } %>
+            <% body.with_action { "Continue" } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Destructive Action -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Destructive Action</h3>
+      <p class="text-sm text-muted-foreground">Use destructive styling for dangerous actions.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render AlertDialogComponent.new do |dialog| %>
+          <% dialog.with_trigger(classes: "bg-destructive text-white hover:bg-destructive/90") do %>
+            <%= lucide_icon("trash-2", class: "size-4") %>
+            Delete Account
+          <% end %>
+          <% dialog.with_body do |body| %>
+            <% body.with_title { "Delete Account" } %>
+            <% body.with_description do %>
+              Are you sure you want to delete your account? All of your data will be
+              permanently removed. This action cannot be undone.
+            <% end %>
+            <% body.with_cancel { "Cancel" } %>
+            <% body.with_action(classes: "bg-destructive text-white hover:bg-destructive/90") { "Yes, delete my account" } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Custom Trigger -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Custom Trigger Styling</h3>
+      <p class="text-sm text-muted-foreground">The trigger button can be styled with custom classes.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render AlertDialogComponent.new do |dialog| %>
+          <% dialog.with_trigger(classes: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground") do %>
+            <%= lucide_icon("log-out", class: "size-4") %>
+            Sign Out
+          <% end %>
+          <% dialog.with_body do |body| %>
+            <% body.with_title { "Sign out of your account?" } %>
+            <% body.with_description do %>
+              You will need to sign in again to access your account.
+            <% end %>
+            <% body.with_cancel { "Stay signed in" } %>
+            <% body.with_action { "Sign out" } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Without Description -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Without Description</h3>
+      <p class="text-sm text-muted-foreground">The description slot is optional.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render AlertDialogComponent.new do |dialog| %>
+          <% dialog.with_trigger(classes: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80") { "Quick Confirm" } %>
+          <% dialog.with_body do |body| %>
+            <% body.with_title { "Confirm this action?" } %>
+            <% body.with_cancel { "No" } %>
+            <% body.with_action { "Yes" } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
 </div>
 <%# %>

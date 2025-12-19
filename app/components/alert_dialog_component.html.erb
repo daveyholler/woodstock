@@ -1,0 +1,8 @@
+<%= tag.div(
+  class: component_classes,
+  data: data_attributes,
+  **@html_attributes
+) do %>
+  <%= trigger if trigger? %>
+  <%= body if body? %>
+<% end %>

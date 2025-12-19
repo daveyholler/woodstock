@@ -53,6 +53,50 @@ Mirror the HTML structure from the TypeScript component:
 - Preserve accessibility attributes
 - Match the exact DOM structure from the shadcn source
 
+### 6. CRITICAL: Use Semantic HTML Elements for Their Intended Purpose
+
+**Problem:** Recreating browser-native functionality with divs and CSS classes instead of using proper semantic elements.
+
+**Common Mistakes:**
+❌ Using `<div>` + CSS classes for dialogs:
+```erb
+<div class="<%= dialog_classes %>" data-state="<%= @open ? 'open' : 'closed' %>">
+  <!-- Trying to simulate dialog with CSS -->
+</div>
+```
+
+❌ Manual show/hide with CSS classes instead of native behavior:
+```javascript
+// Manually managing visibility with classes
+element.classList.toggle('hidden')
+```
+
+**Correct Approach:**
+✅ Use semantic `<dialog>` element:
+```erb
+<dialog class="<%= component_classes %>" <%= tag.attributes(@html_attributes.merge(data: data_attributes)) %>>
+  <%# Dialog content %>
+</dialog>
+```
+
+✅ Use native dialog methods in Stimulus:
+```javascript
+// Use browser-native methods
+this.element.showModal() // Opens modal dialog
+this.element.close()     // Closes dialog
+```
+
+**Key Guidelines:**
+- **Always check if a semantic HTML element exists** before creating custom solutions
+- Native elements provide accessibility, keyboard navigation, and focus management for free
+- Common semantic elements to prioritize:
+  - `<dialog>` for modals/alerts (not `<div>` with classes)
+  - `<button>` for clickable actions (not `<div>` with click handlers)
+  - `<details>/<summary>` for collapsible content (not custom accordion divs)
+  - `<select>` for dropdowns when appropriate (not custom div dropdowns)
+
+**When to deviate:** Only when the semantic element doesn't provide the exact UX needed AND you can maintain equivalent accessibility.
+
 ## Output Format
 
 Generate a clean, well-formatted ERB template that:
