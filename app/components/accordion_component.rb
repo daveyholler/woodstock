@@ -151,7 +151,7 @@ class AccordionComponent < ViewComponent::Base
 
     def item_classes
       class_names(
-        "border-b last:border-b-0",
+        "border-b border-border last:border-b-0 overflow-hidden",
         @classes
       )
     end
