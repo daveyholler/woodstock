@@ -4,6 +4,86 @@
     <%= render ThemeToggleComponent.new %>
   </div>
 
+  <!-- Breadcrumb Component Examples -->
+  <section class="space-y-6 w-full max-w-2xl">
+    <h2 class="text-2xl font-bold">Breadcrumb Examples</h2>
+
+    <!-- Basic Usage -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Basic</h3>
+      <p class="text-sm text-muted-foreground">A simple breadcrumb trail for navigation hierarchy.</p>
+      <%= render BreadcrumbComponent.new do |bc| %>
+        <% bc.with_item(href: "/") do %>Home<% end %>
+        <% bc.with_item(href: "/products") do %>Products<% end %>
+        <% bc.with_item(current: true) do %>Laptop<% end %>
+      <% end %>
+    </div>
+
+    <!-- Longer Trail -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Longer Trail</h3>
+      <p class="text-sm text-muted-foreground">Breadcrumbs with deeper navigation hierarchy.</p>
+      <%= render BreadcrumbComponent.new do |bc| %>
+        <% bc.with_item(href: "/") do %>Home<% end %>
+        <% bc.with_item(href: "/docs") do %>Documentation<% end %>
+        <% bc.with_item(href: "/docs/components") do %>Components<% end %>
+        <% bc.with_item(href: "/docs/components/ui") do %>UI<% end %>
+        <% bc.with_item(current: true) do %>Breadcrumb<% end %>
+      <% end %>
+    </div>
+
+    <!-- With Ellipsis -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">With Ellipsis</h3>
+      <p class="text-sm text-muted-foreground">Use ellipsis to indicate collapsed items in long trails.</p>
+      <%= render BreadcrumbComponent.new do |bc| %>
+        <% bc.with_item(href: "/") do %>Home<% end %>
+        <% bc.with_item(ellipsis: true) %>
+        <% bc.with_item(href: "/docs/components") do %>Components<% end %>
+        <% bc.with_item(current: true) do %>Breadcrumb<% end %>
+      <% end %>
+    </div>
+
+    <!-- Custom Separator -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Custom Separator</h3>
+      <p class="text-sm text-muted-foreground">Use a different icon as the separator.</p>
+      <%= render BreadcrumbComponent.new(separator_icon: "slash") do |bc| %>
+        <% bc.with_item(href: "/") do %>Home<% end %>
+        <% bc.with_item(href: "/settings") do %>Settings<% end %>
+        <% bc.with_item(current: true) do %>Profile<% end %>
+      <% end %>
+    </div>
+
+    <!-- With Icons -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">With Icons</h3>
+      <p class="text-sm text-muted-foreground">Include icons in breadcrumb items.</p>
+      <%= render BreadcrumbComponent.new do |bc| %>
+        <% bc.with_item(href: "/") do %>
+          <%= lucide_icon("home", class: "size-4") %>
+        <% end %>
+        <% bc.with_item(href: "/dashboard") do %>
+          <%= lucide_icon("layout-dashboard", class: "size-4 mr-1") %>
+          Dashboard
+        <% end %>
+        <% bc.with_item(current: true) do %>
+          <%= lucide_icon("settings", class: "size-4 mr-1") %>
+          Settings
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Single Item -->
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold text-muted-foreground">Single Item</h3>
+      <p class="text-sm text-muted-foreground">A breadcrumb with just the current page.</p>
+      <%= render BreadcrumbComponent.new do |bc| %>
+        <% bc.with_item(current: true) do %>Home<% end %>
+      <% end %>
+    </div>
+  </section>
+
   <div class="flex flex-row flex-wrap items-center gap-12">
   <%= render AvatarComponent.new do |c| %>
     <% c.with_image(src: "https://github.com/shadcn.png", alt: "@shadcn") %>

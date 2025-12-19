@@ -1,0 +1,52 @@
+<nav <%= tag.attributes(nav_attributes) %>>
+  <ol class="<%= list_classes %>" data-slot="breadcrumb-list">
+    <% items.each_with_index do |item, index| %>
+      <%# Render the breadcrumb item %>
+      <li class="<%= item.item_classes %>" data-slot="breadcrumb-item">
+        <% if item.ellipsis? %>
+          <%# Ellipsis indicator %>
+          <span
+            class="<%= item.ellipsis_classes %>"
+            role="presentation"
+            aria-hidden="true"
+            data-slot="breadcrumb-ellipsis"
+          >
+            <%= helpers.lucide_icon("ellipsis", class: "size-4") %>
+            <span class="sr-only">More</span>
+          </span>
+        <% elsif item.current? %>
+          <%# Current page (non-clickable) %>
+          <span
+            class="<%= item.page_classes %>"
+            role="link"
+            aria-disabled="true"
+            aria-current="page"
+            data-slot="breadcrumb-page"
+          ><%= item %></span>
+        <% elsif item.link? %>
+          <%# Navigable link %>
+          <a
+            href="<%= item.href %>"
+            class="<%= item.link_classes %>"
+            data-slot="breadcrumb-link"
+          ><%= item %></a>
+        <% else %>
+          <%# Fallback for items without href %>
+          <span data-slot="breadcrumb-page"><%= item %></span>
+        <% end %>
+      </li>
+
+      <%# Render separator after item (except for last item) %>
+      <% if item.separator && index < items.length - 1 %>
+        <li
+          class="[&>svg]:size-3.5"
+          role="presentation"
+          aria-hidden="true"
+          data-slot="breadcrumb-separator"
+        >
+          <%= helpers.lucide_icon(separator_icon) %>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+</nav>
